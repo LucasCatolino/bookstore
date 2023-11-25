@@ -1,0 +1,4 @@
+com\cleancode\bookstore\BookRepository.class
+com\cleancode\bookstore\Book.class
+com\cleancode\bookstore\BookstoreApplication.class
+com\cleancode\bookstore\DatabaseConnector.class
