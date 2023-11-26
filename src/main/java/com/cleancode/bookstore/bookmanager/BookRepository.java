@@ -1,4 +1,4 @@
-package com.cleancode.bookstore;
+package com.cleancode.bookstore.bookmanager;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

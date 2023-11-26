@@ -1,37 +1,34 @@
-package com.cleancode.bookstore;
+package com.cleancode.bookstore.bookmanager;
 
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.Table;
-import jakarta.persistence.*;
 
-@Data
-@NoArgsConstructor
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 @Entity
-@Table(name = "books") // Set the table name for the parent class
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "book_type", discriminatorType = DiscriminatorType.STRING)
-public class BookEntity implements Book {
+@JsonDeserialize(as = Book.class)
+public class Novel implements Book {    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String author;
     private int year;
     private String type;
 
-    @Override
-    public String getType() {
-        return this.type;
+    public Novel(String title, String author, int year) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
     }
 
+    // Implement the methods from the Book interface
     @Override
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     @Override
@@ -40,8 +37,19 @@ public class BookEntity implements Book {
     }
 
     @Override
+    public String getType() {
+        return "NOVEL";
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    
+    @Override
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     @Override
@@ -51,7 +59,7 @@ public class BookEntity implements Book {
 
     @Override
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
     @Override
@@ -61,17 +69,12 @@ public class BookEntity implements Book {
 
     @Override
     public int getYear() {
-        return this.year;
+        return year;
     }
 
     @Override
     public void setYear(int year) {
         this.year = year;
-    }
-
-    @Override
-    public void setType(String type) {
-        this.type = type;
     }
 
 }

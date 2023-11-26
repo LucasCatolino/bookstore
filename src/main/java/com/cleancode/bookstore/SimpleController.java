@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cleancode.bookstore.bookmanager.Book;
+import com.cleancode.bookstore.bookmanager.BookRepository;
+import com.cleancode.bookstore.customermanager.Customer;
+import com.cleancode.bookstore.customermanager.CustomerRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/api")
 public class SimpleController {
 
     private final DatabaseConnector databaseConnector;
     private final BookRepository bookRepository;
+    private final CustomerRepository customerRepository;
     //private final EntityManager entityManager;
 
     @Autowired
@@ -29,18 +34,15 @@ public class SimpleController {
     private static final Logger LOGGER = Logger.getLogger(SimpleController.class.getName());
 
     @Autowired
-    public SimpleController(DatabaseConnector databaseConnector, BookRepository bookRepository/*, EntityManager entityManager*/) {
+    public SimpleController(DatabaseConnector databaseConnector, BookRepository bookRepository,
+                            CustomerRepository customerRepository) {
         this.databaseConnector = databaseConnector;
         this.bookRepository = bookRepository;
+        this.customerRepository = customerRepository;
         //this.entityManager = entityManager;
     }
-    
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello world :D";
-    }
 
-    @GetMapping("/{id}")
+    @GetMapping("/books/{id}")
     public String getBookById(@PathVariable Long id) {
         return "Mock response Book " + id;
         //return bookRepository.findById(id);
@@ -59,19 +61,17 @@ public class SimpleController {
         */
     }
 
-    @PostMapping
+    @PostMapping("/books")
     public Book addBook(@RequestBody Book bookRequest) throws Error {
         try {
             Book newBook = objectMapper.readValue(objectMapper.writeValueAsString(bookRequest), Book.class);
-            LOGGER.info("SE GUARDA EL LIBRO");
             return bookRepository.save(newBook);
          } catch (JsonProcessingException e) {
-        // Handle exception (e.g., return an error response)
             throw new Error();
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/books/{id}")
     public String updateBook(@PathVariable Long id, @RequestBody Book bookRequest) {// throws NotFoundException {
         return "Book updated " + id;
         /*
@@ -95,9 +95,34 @@ public class SimpleController {
         */
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/books/{id}")
     public String deleteBook(@PathVariable Long id) {
         //bookRepository.deleteById(id);
-        return "Deleted book " + id;
+        return "Book deleted " + id;
+    }
+
+    @GetMapping("/customers/{id}")
+    public String getCustomeryId(@PathVariable Long id) {
+        return "Customer mock response " + id;
+    }
+
+    @PostMapping("/customers")
+    public Customer addCustomer(@RequestBody Customer customerRequest) throws Error {
+        try {
+            Customer newCustomer = objectMapper.readValue(objectMapper.writeValueAsString(customerRequest), Customer.class);
+            return customerRepository.save(newCustomer);
+         } catch (JsonProcessingException e) {
+            throw new Error();
+        }
+    }
+
+    @PutMapping("/customers/{id}")
+    public String updateCustomer(@PathVariable Long id, @RequestBody Customer customerRequest) {
+        return "Customer updated " + id;
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public String deleteCustomer(@PathVariable Long id) {
+        return "Customer deleted " + id;
     }
 }

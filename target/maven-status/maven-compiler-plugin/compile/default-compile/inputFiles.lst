@@ -1,11 +1,19 @@
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\BookDeserializer.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\Book.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\BookstoreApplication.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\NoArgsConstructor.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\BookEntity.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\BookRepository.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\Data.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\Novel.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\DatabaseConnector.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\SimpleController.java
-C:\Users\Lucas\Documents\Facultad\ITBA\Clean Code\bookstore\src\main\java\com\cleancode\bookstore\TechnicalBook.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\Data.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\BookDeserializer.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\BookRepository.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\Data.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\CustomerDeserializer.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\MajorCustomer.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\Book.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\BookstoreApplication.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\MinorCustomer.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\TechnicalBook.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\DatabaseConnector.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\Novel.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\CustomerEntity.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\Customer.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\NoArgsConstructor.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\BookEntity.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\SimpleController.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\bookmanager\NoArgsConstructor.java
+C:\Users\Lucas\Documents\Facultad\ITBA\bookstore\src\main\java\com\cleancode\bookstore\customermanager\CustomerRepository.java

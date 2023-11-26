@@ -1,4 +1,4 @@
-package com.cleancode.bookstore;
+package com.cleancode.bookstore.customermanager;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -8,38 +8,37 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 
-public class BookDeserializer extends StdDeserializer<Book> {
+public class CustomerDeserializer extends StdDeserializer<Customer> {
 
     private final ObjectMapper mapper;
 
-    public BookDeserializer() {
+    public CustomerDeserializer() {
         this(null);
     }
 
-    public BookDeserializer(Class<?> vc) {
+    public CustomerDeserializer(Class<?> vc) {
         super(vc);
         this.mapper = new ObjectMapper();
     }
 
     @Override
-    public Book deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+    public Customer deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
         ObjectMapper mapper = (ObjectMapper) jp.getCodec();
         JsonNode node = mapper.readTree(jp);
 
         // Extract necessary information from the JSON node
         String type = node.get("type").asText();
-        String title = node.get("title").asText();
-        String author = node.get("author").asText();
-        int year = node.get("year").asInt();
+        String name = node.get("name").asText();
+        String address = node.get("address").asText();
 
-        // Create a Book instance based on the type
+        // Create a Customer instance based on the type
         switch (type.toLowerCase()) {
-            case "novel":
-                return new Novel(title, author, year);
-            case "technical":
-                return new TechnicalBook(title, author, year);
+            case "minor":
+                return new MinorCustomer(name, address);
+            case "major":
+                return new MajorCustomer(name, address);
             default:
-                throw new IllegalArgumentException("Invalid book type: " + type);
+                throw new IllegalArgumentException("Invalid customer type: " + type);
         }
     }
 }

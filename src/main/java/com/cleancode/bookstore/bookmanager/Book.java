@@ -1,4 +1,4 @@
-package com.cleancode.bookstore;
+package com.cleancode.bookstore.bookmanager;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
