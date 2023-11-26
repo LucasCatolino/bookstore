@@ -4,9 +4,8 @@
 * PostgreSQL (port 5434)
 
 ## Run
-1- mvn clean install -U
-
-2- ./mvnw spring-boot:run
+1. mvn clean install -U
+2. ./mvnw spring-boot:run
 
 ## Use
 * POST
