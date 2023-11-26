@@ -16,6 +16,8 @@ import com.cleancode.bookstore.bookmanager.Book;
 import com.cleancode.bookstore.bookmanager.BookRepository;
 import com.cleancode.bookstore.customermanager.Customer;
 import com.cleancode.bookstore.customermanager.CustomerRepository;
+import com.cleancode.bookstore.ordermanager.Order;
+import com.cleancode.bookstore.ordermanager.OrderRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,6 +28,7 @@ public class SimpleController {
     private final DatabaseConnector databaseConnector;
     private final BookRepository bookRepository;
     private final CustomerRepository customerRepository;
+    private final OrderRepository orderRepository;
     //private final EntityManager entityManager;
 
     @Autowired
@@ -35,16 +38,17 @@ public class SimpleController {
 
     @Autowired
     public SimpleController(DatabaseConnector databaseConnector, BookRepository bookRepository,
-                            CustomerRepository customerRepository) {
+                            CustomerRepository customerRepository, OrderRepository orderRepository) {
         this.databaseConnector = databaseConnector;
         this.bookRepository = bookRepository;
         this.customerRepository = customerRepository;
+        this.orderRepository = orderRepository;
         //this.entityManager = entityManager;
     }
 
     @GetMapping("/books/{id}")
     public String getBookById(@PathVariable Long id) {
-        return "Mock response Book " + id;
+        return "Book mock response " + id;
         //return bookRepository.findById(id);
         /*
         String nativeQuery = "SELECT * FROM novel WHERE id = :id UNION ALL SELECT * FROM technical_book WHERE id = :id";
@@ -124,5 +128,30 @@ public class SimpleController {
     @DeleteMapping("/customers/{id}")
     public String deleteCustomer(@PathVariable Long id) {
         return "Customer deleted " + id;
+    }
+    
+    @GetMapping("/orders/{id}")
+    public String getOrderId(@PathVariable Long id) {
+        return "Order mock response " + id;
+    }
+
+    @PostMapping("/orders")
+    public Order addOrder(@RequestBody Order orderRequest) throws Error {
+        try {
+            Order newOrder = objectMapper.readValue(objectMapper.writeValueAsString(orderRequest), Order.class);
+            return orderRepository.save(newOrder);
+         } catch (JsonProcessingException e) {
+            throw new Error();
+        }
+    }
+
+    @PutMapping("/orders/{id}")
+    public String updateOrder(@PathVariable Long id, @RequestBody Order orderRequest) {
+        return "Order updated " + id;
+    }
+
+    @DeleteMapping("/orders/{id}")
+    public String deleteOrder(@PathVariable Long id) {
+        return "Order deleted " + id;
     }
 }
