@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "customer")
 @JsonDeserialize(using = CustomerDeserializer.class)
-public /*abstract*/ interface Customer { //TODO: volverlo abstract
+public interface Customer {
     
     @Id
     public Long getId();
