@@ -1,3 +1,4 @@
+com\cleancode\bookstore\BookDeserializer.class
 com\cleancode\bookstore\BookRepository.class
 com\cleancode\bookstore\Book.class
 com\cleancode\bookstore\BookstoreApplication.class

@@ -1,11 +1,8 @@
 package com.cleancode.bookstore;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,59 +12,69 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @RestController
 @RequestMapping("/api/books")
 public class SimpleController {
 
     private final DatabaseConnector databaseConnector;
     private final BookRepository bookRepository;
+    //private final EntityManager entityManager;
 
     @Autowired
-    public SimpleController(DatabaseConnector databaseConnector, BookRepository bookRepository) {
+    private ObjectMapper objectMapper;
+
+    private static final Logger LOGGER = Logger.getLogger(SimpleController.class.getName());
+
+    @Autowired
+    public SimpleController(DatabaseConnector databaseConnector, BookRepository bookRepository/*, EntityManager entityManager*/) {
         this.databaseConnector = databaseConnector;
         this.bookRepository = bookRepository;
+        //this.entityManager = entityManager;
     }
     
     @GetMapping("/hello")
     public String hello() {
         return "Hello world :D";
     }
-/*
-    @GetMapping
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
-*/
+
     @GetMapping("/{id}")
-    public Optional<Book> getBookById(@PathVariable Long id) {
-        return bookRepository.findById(id);
+    public String getBookById(@PathVariable Long id) {
+        return "Mock response Book " + id;
+        //return bookRepository.findById(id);
+        /*
+        String nativeQuery = "SELECT * FROM novel WHERE id = :id UNION ALL SELECT * FROM technical_book WHERE id = :id";
+        
+        NativeQuery<Book> query = (NativeQuery<Book>) entityManager.createNativeQuery(nativeQuery, Book.class);
+        query.setParameter("id", id);
+        
+        try {
+            Book book = query.getSingleResult();
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (NoResultException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        */
     }
 
     @PostMapping
-    public Book addBook(@RequestBody Book bookRequest) {
-        // You can set additional properties or perform validation before saving
-        Book newBook;
-        switch (bookRequest.getType().toLowerCase()) {
-            case "novel":
-                newBook = new Novel(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getYear());
-                break;
-            /*case "technical":
-                newBook = new TechnicalBook(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getYear());
-                break;*/
-            default:
-                throw new IllegalArgumentException("Invalid book type: " + bookRequest.getType());
+    public Book addBook(@RequestBody Book bookRequest) throws Error {
+        try {
+            Book newBook = objectMapper.readValue(objectMapper.writeValueAsString(bookRequest), Book.class);
+            LOGGER.info("SE GUARDA EL LIBRO");
+            return bookRepository.save(newBook);
+         } catch (JsonProcessingException e) {
+        // Handle exception (e.g., return an error response)
+            throw new Error();
         }
-        /*Book newBook = Book.createBook(
-            bookRequest.getType(),
-            bookRequest.getTitle(),
-            bookRequest.getAuthor(),
-            bookRequest.getYear()
-        );*/
-        return bookRepository.save(newBook);
     }
-/*
+
     @PutMapping("/{id}")
-    public Book updateBook(@PathVariable Long id, @RequestBody Book bookRequest) throws NotFoundException {
+    public String updateBook(@PathVariable Long id, @RequestBody Book bookRequest) {// throws NotFoundException {
+        return "Book updated " + id;
+        /*
         // Retrieve the existing book from the database
         Optional<Book> optionalBook = bookRepository.findById(id);
 
@@ -85,10 +92,12 @@ public class SimpleController {
             // Handle the case where the book with the given ID is not found
             throw new NotFoundException();
         }
+        */
     }
-*/
+
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Long id) {
-        bookRepository.deleteById(id);
+    public String deleteBook(@PathVariable Long id) {
+        //bookRepository.deleteById(id);
+        return "Deleted book " + id;
     }
 }
