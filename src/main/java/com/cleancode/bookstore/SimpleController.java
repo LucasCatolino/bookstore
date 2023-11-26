@@ -18,6 +18,8 @@ import com.cleancode.bookstore.customermanager.Customer;
 import com.cleancode.bookstore.customermanager.CustomerRepository;
 import com.cleancode.bookstore.ordermanager.Order;
 import com.cleancode.bookstore.ordermanager.OrderRepository;
+import com.cleancode.bookstore.reportsmanager.CustomerActivityReport;
+import com.cleancode.bookstore.reportsmanager.SalesReport;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -153,5 +155,17 @@ public class SimpleController {
     @DeleteMapping("/orders/{id}")
     public String deleteOrder(@PathVariable Long id) {
         return "Order deleted " + id;
+    }
+
+    @GetMapping("/reports/sales/{data}")
+    public String getSalesReport(@PathVariable String data){
+        SalesReport salesReport = new SalesReport();
+        return salesReport.generateReport(data);
+    }
+
+    @GetMapping("/reports/customer/{data}")
+    public String getCustomerReport(@PathVariable String data){
+        CustomerActivityReport customerActivityReport = new CustomerActivityReport();
+        return customerActivityReport.generateReport(data);
     }
 }
